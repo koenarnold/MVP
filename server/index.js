@@ -1,14 +1,16 @@
 const express = require('express');
 let app = express();
-require('dotenv').config
+require('dotenv').config()
+const axios = require('axios')
+const controllers = require('./controllers.js')
 const db = require('../database/db.js')
-
-var port = process.env.HOSTPORT || 3001
 
 app.use(express.static(__dirname + '/../client/dist'))
 
 app.use(express.json())
 
-app.listen(port, function() {
-  console.log(`listening on port ${port}`);
+app.post('/createQuiz', controllers.createQuiz)
+
+app.listen(process.env.HOSTPORT, function() {
+  console.log(`listening on port ${process.env.HOSTPORT}`);
 });
