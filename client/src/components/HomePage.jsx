@@ -10,9 +10,10 @@ const HomePage = ({setCurrentPage, username, setQuestionsArr}) => {
       axios.post('/createQuiz', {"videogame": videogame}).then((res) => {
         var splitData = res.data.split("\n").filter((string) => string.length > 0)
         console.log('before removing first line: ', splitData)
-        if (!splitData[0].includes('?')) {
+        if (!splitData[0].indexOf('?')) {
           splitData = splitData.shift()
         }
+        console.log('after removing first line: ', splitData)
         if (splitData.length === 30) {
           var groupedSplitDataArr = [];
           for (var i = 0; i < splitData.length; i += 6) {
@@ -20,7 +21,7 @@ const HomePage = ({setCurrentPage, username, setQuestionsArr}) => {
             temp.push(splitData[i], splitData[i + 1], splitData[i + 2], splitData[i + 3], splitData[i + 4], splitData[i + 5])
             groupedSplitDataArr.push(temp)
           }
-          console.log('HERE'groupedSplitDataArr)
+          console.log('HERE', groupedSplitDataArr)
           setQuestionsArr(groupedSplitDataArr)
           setCurrentPage(2)
         } else {

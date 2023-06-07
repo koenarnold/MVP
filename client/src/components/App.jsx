@@ -34,7 +34,7 @@ const App = () => {
     case 3:
       return (
         <div>
-          <QuizEnd setCurrentPage={setCurrentPage}/>
+          <QuizEnd setCurrentPage={setCurrentPage} username={username}/>
         </div>
       )
       break;

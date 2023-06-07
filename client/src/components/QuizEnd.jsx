@@ -1,11 +1,11 @@
 import React, {useState} from 'react';
 
-const QuizEnd = ({setCurrentPage}) => {
+const QuizEnd = ({setCurrentPage, username}) => {
 
   return (
     <div>
-      TEST 4
-      <button onClick={(e)=>{e.preventDefault; setCurrentPage(0)}}>next</button>
+      <h1>CONGRATS {username} - you failed</h1>
+      <button onClick={(e)=>{e.preventDefault; setCurrentPage(0)}}>go back home</button>
     </div>
   )
 }
