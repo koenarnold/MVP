@@ -1,0 +1,28 @@
+.answer{
+  padding: 20px;
+  border: 2px solid black;
+  width: 50%;
+}
+
+.answer:hover{
+  background-color: beige;
+}
+
+.old-quiz{
+  width: 50%;
+  margin: 2px;
+  padding: 2px;
+  border: 1px solid black;
+}
+
+.old-quiz:hover{
+  background-color: aquamarine;
+}
+
+#videogame-box {
+  margin-bottom: 3vh;
+}
+
+.create-quiz-btn{
+  margin-top: 2vh;
+}

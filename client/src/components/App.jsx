@@ -7,8 +7,11 @@ import QuizEnd from './QuizEnd.jsx'
 const App = () => {
 
   const [currentPage, setCurrentPage] = useState(0);
+  const [quizName, setQuizName] = useState('')
   const [username, setUsername] = useState('')
   const [questionsArr, setQuestionsArr] = useState([])
+  const [oldQuizzes, setOldQuizzes] = useState(0)
+  var [userScore, setUserScore] = useState(0)
 
   switch(currentPage) {
     case 0:
@@ -20,21 +23,21 @@ const App = () => {
     case 1:
       return (
         <div>
-          <HomePage setCurrentPage={setCurrentPage} username={username} setQuestionsArr={setQuestionsArr}/>
+          <HomePage setCurrentPage={setCurrentPage} username={username} setQuestionsArr={setQuestionsArr} setQuizName={setQuizName} setOldQuizzes={setOldQuizzes} oldQuizzes={oldQuizzes} questionsArr={questionsArr}/>
         </div>
       )
       break;
     case 2:
       return (
         <div>
-          <Quiz setCurrentPage={setCurrentPage} questionsArr={questionsArr}/>
+          <Quiz setCurrentPage={setCurrentPage} questionsArr={questionsArr} userScore={userScore} setUserScore={setUserScore}/>
         </div>
       )
       break;
     case 3:
       return (
         <div>
-          <QuizEnd setCurrentPage={setCurrentPage} username={username}/>
+          <QuizEnd setCurrentPage={setCurrentPage} username={username} userScore={userScore} questionsArr={questionsArr} quizName={quizName}/>
         </div>
       )
       break;
