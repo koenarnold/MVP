@@ -1,73 +1,51 @@
 import React, {useState} from 'react';
-import QuizQuestion1 from './Questions/QuizQuestion1.jsx'
-import QuizQuestion2 from './Questions/QuizQuestion2.jsx'
-import QuizQuestion3 from './Questions/QuizQuestion3.jsx'
-import QuizQuestion4 from './Questions/QuizQuestion4.jsx'
-import QuizQuestion5 from './Questions/QuizQuestion5.jsx'
 
-const Quiz = ({setCurrentPage, questionsArr}) => {
+const Quiz = ({setCurrentPage, questionsArr, userScore, setUserScore}) => {
 
-  var [currQuestion, setCurrQuestion] = useState(1)
+  var [questionIndex, setQuestionIndex] = useState(0)
+  const [hasSelected, setHasSelected] = useState(false)
 
   const handleNextQuestion = (e) => {
     e.preventDefault;
-    if (currQuestion === 5) {
+    if (questionIndex === 4) {
       setCurrentPage(3)
     } else {
-      setCurrQuestion(currQuestion+=1)
+      setHasSelected(false)
+      document.getElementById('result').innerHTML = ''
+      setQuestionIndex(questionIndex+=1)
+    }
+  }
+
+  const handleAnswerSelect = (e) => {
+    e.preventDefault;
+    if (hasSelected) {
+      alert('cant choose two answers')
+    } else {
+      var selectedAnswer = document.getElementById(e.target.id).innerHTML;
+      if (selectedAnswer === questionsArr[questionIndex][5]) {
+        document.getElementById('result').innerHTML = 'CORRECT'
+        setUserScore(userScore += 100)
+      } else {
+        document.getElementById('result').innerHTML = 'WRONG'
+      }
+      setHasSelected(true)
     }
   }
 
   if (questionsArr.length > 0) {
-    switch (currQuestion) {
-      case 1:
-        return (
-          <div>
-            <h1>QUIZ</h1>
-            <div>{JSON.stringify(questionsArr)}</div>
-            <QuizQuestion1 questionsArr={questionsArr}/>
-            <button onClick={handleNextQuestion}>next</button>
-            <button onClick={(e)=>{e.preventDefault; setCurrentPage(1) }}>new game</button>
-          </div>
-        )
-        break;
-      case 2:
-        return (
-          <div>
-            <h1>QUIZ</h1>
-            <QuizQuestion2 questionsArr={questionsArr}/>
-            <button onClick={handleNextQuestion}>next</button>
-          </div>
-        )
-        break;
-      case 3:
-        return (
-          <div>
-            <h1>QUIZ</h1>
-            <QuizQuestion3 questionsArr={questionsArr}/>
-            <button onClick={handleNextQuestion}>next</button>
-          </div>
-        )
-        break;
-      case 4:
-        return (
-          <div>
-            <h1>QUIZ</h1>
-            <QuizQuestion4 questionsArr={questionsArr}/>
-            <button onClick={handleNextQuestion}>next</button>
-          </div>
-        )
-        break;
-      case 5:
-        return (
-          <div>
-            <h1>QUIZ</h1>
-            <QuizQuestion5 questionsArr={questionsArr}/>
-            <button onClick={handleNextQuestion}>next</button>
-          </div>
-        )
-        break;
-    }
+    return (
+      <div>
+        <h1>Quiz</h1>
+        <p>Score: {userScore}</p>
+        <h3 className="question">{questionsArr[questionIndex][0]}</h3>
+        <p className="answer" id="1" onClick={handleAnswerSelect}>{questionsArr[questionIndex][1]}</p>
+        <p className="answer" id="2" onClick={handleAnswerSelect}>{questionsArr[questionIndex][2]}</p>
+        <p className="answer" id="3" onClick={handleAnswerSelect}>{questionsArr[questionIndex][3]}</p>
+        <p className="answer" id="4" onClick={handleAnswerSelect}>{questionsArr[questionIndex][4]}</p>
+        <p id="result" ></p>
+        {questionIndex === 4 ? <button onClick={handleNextQuestion}>submit</button> : <button onClick={handleNextQuestion}>next</button> }
+      </div>
+    )
   } else {
     return (
       <div>
