@@ -13,9 +13,19 @@ const HomePage = ({setCurrentPage, username, setQuestionsArr}) => {
         if (!splitData[0].includes('?')) {
           splitData = splitData.shift()
         }
-        console.log(splitData)
-        setQuestionsArr(splitData)
-        setCurrentPage(2)
+        if (splitData.length === 30) {
+          var groupedSplitDataArr = [];
+          for (var i = 0; i < splitData.length; i += 6) {
+            var temp = []
+            temp.push(splitData[i], splitData[i + 1], splitData[i + 2], splitData[i + 3], splitData[i + 4], splitData[i + 5])
+            groupedSplitDataArr.push(temp)
+          }
+          console.log('HERE'groupedSplitDataArr)
+          setQuestionsArr(groupedSplitDataArr)
+          setCurrentPage(2)
+        } else {
+          alert('try again please, there was an issue with the API')
+        }
       })
     } else {
       alert('Please enter valid video game')

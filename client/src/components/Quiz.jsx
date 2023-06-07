@@ -24,7 +24,6 @@ const Quiz = ({setCurrentPage, questionsArr}) => {
         return (
           <div>
             <h1>QUIZ</h1>
-            <div>{JSON.stringify(questionsArr)}</div>
             <QuizQuestion1 questionsArr={questionsArr}/>
             <button onClick={handleNextQuestion}>next</button>
             <button onClick={(e)=>{e.preventDefault; setCurrentPage(1) }}>new game</button>

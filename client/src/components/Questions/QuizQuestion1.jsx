@@ -1,6 +1,8 @@
 import React, {useState} from 'react'
 
-const QuizQuestion1 = () => {
+const QuizQuestion1 = ({questionsArr}) => {
+
+
 
   return (
     <div>
