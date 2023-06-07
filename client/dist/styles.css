@@ -5,6 +5,7 @@
 }
 
 .answer:hover{
+  cursor: default;
   background-color: beige;
 }
 

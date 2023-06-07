@@ -42,7 +42,7 @@ const QuizEnd = ({setCurrentPage, username, userScore, questionsArr, quizName}) 
       <h1>CONGRATS {username} - you got {userScore} points! Wow, you did {adjective}!</h1>
       <p>would you like to save this quiz?</p>
       <button onClick={handleSaveQuiz}>save</button>
-      <button onClick={(e)=>{e.preventDefault; setHasSaved(false); setCurrentPage(0)}}>go back home</button>
+      <button onClick={(e)=>{e.preventDefault; setHasSaved(false); setCurrentPage(0); setUserScore(0)}}>go back home</button>
     </div>
   )
 }
