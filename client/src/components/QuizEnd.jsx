@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import axios from 'axios';
+import Button from '@mui/material/Button';
 
 const QuizEnd = ({setCurrentPage, username, userScore, questionsArr, quizName, setUserScore}) => {
 
@@ -23,7 +24,7 @@ const QuizEnd = ({setCurrentPage, username, userScore, questionsArr, quizName, s
   var adjective = 'ok';
 
   switch(userScore) {
-    case 100:
+    case 0 || 100:
       adjective = 'terrible'
       break;
     case 200:
@@ -38,11 +39,15 @@ const QuizEnd = ({setCurrentPage, username, userScore, questionsArr, quizName, s
   }
 
   return (
-    <div>
-      <h1>CONGRATS {username} - you got {userScore} points! Wow, you did {adjective}!</h1>
-      <p>would you like to save this quiz?</p>
-      <button onClick={handleSaveQuiz}>save</button>
-      <button onClick={(e)=>{e.preventDefault; setHasSaved(false); setCurrentPage(0); setUserScore(0)}}>go back home</button>
+    <div className="quiz-end">
+      <div className="quiz-end-title">
+        <h1>CONGRATS {username} - you got {userScore} points! Wow, you did {adjective}!</h1>
+        <p>would you like to save this quiz?</p>
+      </div>
+      <div className="quiz-end-btns">
+        <Button variant="contained" onClick={handleSaveQuiz}>save</Button>
+        <Button sx={{marginLeft: "1vw"}} variant="contained" onClick={(e)=>{e.preventDefault; setHasSaved(false); setCurrentPage(0); setUserScore(0)}}>go back home</Button>
+      </div>
     </div>
   )
 }

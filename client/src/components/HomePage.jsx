@@ -1,5 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
 
 const HomePage = ({setCurrentPage, username, setQuestionsArr, setQuizName, setOldQuizzes, oldQuizzes, questionsArr}) => {
 
@@ -10,7 +12,7 @@ const HomePage = ({setCurrentPage, username, setQuestionsArr, setQuizName, setOl
 
   const handleCreateQuiz = (e) => {
     e.preventDefault;
-    setLoading(true)
+    setLoading(true);
     var videogame = document.getElementById('videogame-box').value;
     setQuizName(videogame)
     if (videogame !== '' && typeof videogame !== 'Number') {
@@ -70,25 +72,35 @@ const HomePage = ({setCurrentPage, username, setQuestionsArr, setQuizName, setOl
       var temp = [oldQuizzes[e.target.id].quiz[i].question, oldQuizzes[e.target.id].quiz[i].answer1, oldQuizzes[e.target.id].quiz[i].answer2, oldQuizzes[e.target.id].quiz[i].answer3, oldQuizzes[e.target.id].quiz[i].answer4, oldQuizzes[e.target.id].quiz[i].correctAnswer];
       tempArr.push(temp)
     }
+    setQuizName(oldQuizzes[e.target.id].quizName)
     setQuestionsArr(tempArr)
     setCurrentPage(2)
   }
 
   if (!showNuke) {
-    return (
-      <div>
-        <div>Hey there {username}!</div>
-        <div>Please enter a topic you would like to take a quiz on: </div>
-        <input type="text" id="videogame-box"/>
-        {oldQuizzes ? oldQuizzes.map((quiz, index) => (<div className="old-quiz" onClick={handleOldQuiz} id={index} >{quiz.quizName} ----- Previous Score: {quiz.score} </div>)) : null}
-        {username === "koen" ?
-        <div>
-              <button onClick={(e)=>{e.preventDefault; axios.get('/testdb')}}>test db</button>
-              <button onClick={(e)=>{e.preventDefault; axios.get('/testdbclear')}}>test clear db</button>
-        </div> : null}
-        <button className="create-quiz-btn" onClick={handleCreateQuiz}>Create Quiz</button>
-        {loading ? <div> <img src="https://media.tenor.com/FawYo00tBekAAAAC/loading-thinking.gif" alt="loading" height="250vh" width="250vw"/> <p>Loading...</p></div> : null}
-        <button class="Nuclear" onClick={(e)=>{e.preventDefault; setShowNuke(true)}}>nuke server</button>
+    return(
+      <div style={{display: "flex", flexDirection: "column", alignItems: "center"}}>
+        <div className="homepage">
+          <h2 style={{marginBottom: "0", display: "flex", justifyContent: "center"}}>Hey there {username}!</h2>
+          <h3 style={{display: "flex", justifyContent: "center"}}>Please enter a topic you would like to take a quiz on: </h3>
+          <div className="create-quiz">
+            <TextField autoComplete='off' id="videogame-box"></TextField>
+            <Button sx={{marginLeft: "1vw", height: "5vh"}} variant="contained" className="create-quiz-btn" onClick={handleCreateQuiz}>Create Quiz</Button>
+            {loading ? <div style={{position: "absolute", display: "flex", flexDirection: "column"}}> <img style={{borderRadius: "3px", height: "10vh", width: "10vw", marginLeft: "30vw"}} src="https://media.tenor.com/FawYo00tBekAAAAC/loading-thinking.gif" alt="loading"/></div> : null}
+          </div>
+          {username === "koen" ?
+          <div style={{display: "flex", justifyContent: "center"}}>
+                <Button variant="contained" onClick={(e)=>{e.preventDefault; axios.get('/testdb')}}>test db</Button>
+                <Button variant="contained" onClick={(e)=>{e.preventDefault; axios.get('/testdbclear')}}>test clear db</Button>
+          </div> : null}
+          <div style={{display: "flex", justifyContent: "center"}}>
+            <div className="old-quiz-list">
+              <p style={{display: "flex", justifyContent: "center"}}>Previous Quizzes</p>
+              {oldQuizzes ? oldQuizzes.map((quiz, index) => (<div className="old-quiz-btn"><Button sx={{display: "flex", marginTop: "1vh", minWidth: "25vw", justifyContent: "center"}} variant="contained" className="old-quiz" onClick={handleOldQuiz} id={index} >{quiz.quizName} ----- Previous Score: {quiz.score} </Button> </div>)) : null}
+            </div>
+          </div>
+        </div>
+        <button class="Nuclear" onClick={(e)=>{e.preventDefault; setShowNuke(true); }}>nuke server</button>
       </div>
     )
   } else {

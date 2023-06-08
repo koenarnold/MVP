@@ -4,6 +4,7 @@ import HomePage from './HomePage.jsx'
 import Quiz from './Quiz.jsx'
 import QuizEnd from './QuizEnd.jsx'
 
+
 const App = () => {
 
   const [currentPage, setCurrentPage] = useState(0);
@@ -30,7 +31,7 @@ const App = () => {
     case 2:
       return (
         <div>
-          <Quiz setCurrentPage={setCurrentPage} questionsArr={questionsArr} userScore={userScore} setUserScore={setUserScore}/>
+          <Quiz setCurrentPage={setCurrentPage} questionsArr={questionsArr} userScore={userScore} setUserScore={setUserScore} quizName={quizName}/>
         </div>
       )
       break;
