@@ -17,6 +17,7 @@
 }
 
 .old-quiz:hover{
+  cursor: default;
   background-color: aquamarine;
 }
 
@@ -26,4 +27,45 @@
 
 .create-quiz-btn{
   margin-top: 2vh;
+  margin-bottom: 2vh;
+}
+
+.correct-answer{
+  color: green;
+  font-weight: 700;
+}
+
+
+
+
+@keyframes colorChange {
+  0% {
+    background-color: red;
+  }
+  50% {
+    background-color: rgb(177, 96, 96);
+  }
+  100% {
+    background-color: red;
+  }
+}
+
+.Nuclear {
+  height: 6vh;
+  width: 6vw;
+  background-color: white;
+  animation: colorChange 1s infinite;
+  margin: 3vh;
+  height: 10em;
+  border-radius: 50%;
+  font-weight: bold;
+}
+
+.Nuclear:hover {
+  color: white;
+}
+
+.NukePage {
+  font-size: 20em;
+  text-align: center;
 }

@@ -43,6 +43,7 @@ const Quiz = ({setCurrentPage, questionsArr, userScore, setUserScore}) => {
         <p className="answer" id="3" onClick={handleAnswerSelect}>{questionsArr[questionIndex][3]}</p>
         <p className="answer" id="4" onClick={handleAnswerSelect}>{questionsArr[questionIndex][4]}</p>
         <p id="result" ></p>
+        {hasSelected ? <p className="correct-answer">{questionsArr[questionIndex][5]}</p> : null}
         {questionIndex === 4 ? <button onClick={handleNextQuestion}>submit</button> : <button onClick={handleNextQuestion}>next</button> }
       </div>
     )

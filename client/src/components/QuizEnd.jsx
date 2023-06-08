@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import axios from 'axios';
 
-const QuizEnd = ({setCurrentPage, username, userScore, questionsArr, quizName}) => {
+const QuizEnd = ({setCurrentPage, username, userScore, questionsArr, quizName, setUserScore}) => {
 
   const [hasSaved, setHasSaved] = useState(false)
 

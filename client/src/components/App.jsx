@@ -37,7 +37,7 @@ const App = () => {
     case 3:
       return (
         <div>
-          <QuizEnd setCurrentPage={setCurrentPage} username={username} userScore={userScore} questionsArr={questionsArr} quizName={quizName}/>
+          <QuizEnd setCurrentPage={setCurrentPage} username={username} userScore={userScore} questionsArr={questionsArr} quizName={quizName} setUserScore={setUserScore}/>
         </div>
       )
       break;

@@ -3,10 +3,14 @@ import axios from 'axios';
 
 const HomePage = ({setCurrentPage, username, setQuestionsArr, setQuizName, setOldQuizzes, oldQuizzes, questionsArr}) => {
 
+  const [showNuke, setShowNuke] = useState(false)
+  const [loading, setLoading] = useState(false)
+
   useEffect(()=>{axios.post('/getQuizzes', {'username': username}).then((res)=>{setOldQuizzes(res.data)})}, [])
 
   const handleCreateQuiz = (e) => {
     e.preventDefault;
+    setLoading(true)
     var videogame = document.getElementById('videogame-box').value;
     setQuizName(videogame)
     if (videogame !== '' && typeof videogame !== 'Number') {
@@ -15,7 +19,7 @@ const HomePage = ({setCurrentPage, username, setQuestionsArr, setQuizName, setOl
         console.log('before removing first line: ', splitData)
         console.log('does the first line contain a ?:', splitData[0].indexOf('?'))
         if (splitData[0].indexOf('?') === -1) {
-          splitData = splitData.shift()
+          splitData.shift()
         }
         console.log('after removing first line: ', splitData)
         if (splitData.length === 30) {
@@ -47,6 +51,7 @@ const HomePage = ({setCurrentPage, username, setQuestionsArr, setQuizName, setOl
             groupedSplitDataArr.push(temp)
           }
           console.log('HERE', groupedSplitDataArr)
+          setLoading(false)
           setQuestionsArr(groupedSplitDataArr)
           setCurrentPage(2)
         } else {
@@ -69,20 +74,30 @@ const HomePage = ({setCurrentPage, username, setQuestionsArr, setQuizName, setOl
     setCurrentPage(2)
   }
 
-  return (
-    <div>
-      <div>Hey there {username}!</div>
-      <div>Please enter a video game you would like to take a quiz on: </div>
-      <input type="text" id="videogame-box"/>
-      {oldQuizzes ? oldQuizzes.map((quiz, index) => (<div className="old-quiz" onClick={handleOldQuiz} id={index} >{quiz.quizName} ----- Previous Score: {quiz.score} </div>)) : null}
-      {username === "koen" ?
+  if (!showNuke) {
+    return (
       <div>
-            <button onClick={(e)=>{e.preventDefault; axios.get('/testdb')}}>test db</button>
-            <button onClick={(e)=>{e.preventDefault; axios.get('/testdbclear')}}>test clear db</button>
-      </div> : null}
-      <button className="create-quiz-btn" onClick={handleCreateQuiz}>Create Quiz</button>
-    </div>
-  )
+        <div>Hey there {username}!</div>
+        <div>Please enter a topic you would like to take a quiz on: </div>
+        <input type="text" id="videogame-box"/>
+        {oldQuizzes ? oldQuizzes.map((quiz, index) => (<div className="old-quiz" onClick={handleOldQuiz} id={index} >{quiz.quizName} ----- Previous Score: {quiz.score} </div>)) : null}
+        {username === "koen" ?
+        <div>
+              <button onClick={(e)=>{e.preventDefault; axios.get('/testdb')}}>test db</button>
+              <button onClick={(e)=>{e.preventDefault; axios.get('/testdbclear')}}>test clear db</button>
+        </div> : null}
+        <button className="create-quiz-btn" onClick={handleCreateQuiz}>Create Quiz</button>
+        {loading ? <div> <img src="https://media.tenor.com/FawYo00tBekAAAAC/loading-thinking.gif" alt="loading" height="250vh" width="250vw"/> <p>Loading...</p></div> : null}
+        <button class="Nuclear" onClick={(e)=>{e.preventDefault; setShowNuke(true)}}>nuke server</button>
+      </div>
+    )
+  } else {
+    return (
+      <div>
+        <img src="https://media.tenor.com/mBvN3LJ0Q5AAAAAC/%D0%B2%D0%B5%D0%BB%D1%8C%D0%B7%D0%B5%D0%B2%D1%83%D0%BB%D0%B3%D0%BE%D0%B2%D0%BD%D0%BE%D0%BF%D0%BE%D0%BD%D0%BE%D1%81-beelzebub.gif" alt="face" height="1000vh" width="100%"/>
+      </div>
+    )
+  }
 }
 
 export default HomePage
