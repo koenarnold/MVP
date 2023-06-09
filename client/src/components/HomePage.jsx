@@ -89,7 +89,7 @@ const HomePage = ({setCurrentPage, username, setQuestionsArr, setQuizName, setOl
             {loading ? <div style={{position: "absolute", display: "flex", flexDirection: "column"}}> <img style={{borderRadius: "3px", height: "10vh", width: "10vw", marginLeft: "30vw"}} src="https://media.tenor.com/FawYo00tBekAAAAC/loading-thinking.gif" alt="loading"/></div> : null}
           </div>
           {username === "koen" ?
-          <div style={{display: "flex", justifyContent: "center"}}>
+          <div style={{display: "flex", justifyContent: "center", marginTop: "2vh"}}>
                 <Button variant="contained" onClick={(e)=>{e.preventDefault; axios.get('/testdb')}}>test db</Button>
                 <Button variant="contained" onClick={(e)=>{e.preventDefault; axios.get('/testdbclear')}}>test clear db</Button>
           </div> : null}

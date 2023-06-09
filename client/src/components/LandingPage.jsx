@@ -14,6 +14,7 @@ const LandingPage = ({setCurrentPage, setUsername}) => {
   return (
     <div className="landing-page">
       <div className="login-main">
+        <h1 style={{display: "flex", flexDirection: "column", alignItems: "center"}}>Quiz Game</h1>
         <h3 style={{display: "flex", flexDirection: "column", alignItems: "center"}}>Hey There! Please Log-in</h3>
         <div className="login">
           <TextField id="login-box"></TextField>
