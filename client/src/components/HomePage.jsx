@@ -79,24 +79,24 @@ const HomePage = ({setCurrentPage, username, setQuestionsArr, setQuizName, setOl
 
   if (!showNuke) {
     return(
-      <div style={{display: "flex", flexDirection: "column", alignItems: "center"}}>
+      <div className="background" style={{display: "flex", flexDirection: "column", alignItems: "center"}}>
         <div className="homepage">
           <h2 style={{marginBottom: "0", display: "flex", justifyContent: "center"}}>Hey there {username}!</h2>
           <h3 style={{display: "flex", justifyContent: "center"}}>Please enter a topic you would like to take a quiz on: </h3>
           <div className="create-quiz">
             <TextField autoComplete='off' id="videogame-box"></TextField>
-            <Button sx={{marginLeft: "1vw", height: "5vh"}} variant="contained" className="create-quiz-btn" onClick={handleCreateQuiz}>Create Quiz</Button>
+            <Button sx={{color: "black", marginLeft: "1vw", height: "5vh", backgroundColor: "#2fb52f", "&:hover": {backgroundColor: "#48e048", outline: "1px solid rgba(255, 255, 255, 0.5)", outlineOffset: "0.2vw"}}} variant="contained" className="create-quiz-btn" onClick={handleCreateQuiz}>Create Quiz</Button>
             {loading ? <div style={{position: "absolute", display: "flex", flexDirection: "column"}}> <img style={{borderRadius: "3px", height: "10vh", width: "10vw", marginLeft: "30vw"}} src="https://media.tenor.com/FawYo00tBekAAAAC/loading-thinking.gif" alt="loading"/></div> : null}
           </div>
-          {username === "koen" ?
+          {username === "admin" ?
           <div style={{display: "flex", justifyContent: "center", marginTop: "2vh"}}>
-                <Button variant="contained" onClick={(e)=>{e.preventDefault; axios.get('/testdb')}}>test db</Button>
-                <Button variant="contained" onClick={(e)=>{e.preventDefault; axios.get('/testdbclear')}}>test clear db</Button>
+                <Button sx={{backgroundColor: "#ff6534", "&:hover": {backgroundColor: "#f5b042"}}} variant="contained" onClick={(e)=>{e.preventDefault; axios.get('/testdb')}}>test db</Button>
+                <Button sx={{backgroundColor: "#ff6534", marginLeft: "2vw", "&:hover": {backgroundColor: "#f5b042"}}} variant="contained" onClick={(e)=>{e.preventDefault; axios.get('/testdbclear')}}>test clear db</Button>
           </div> : null}
           <div style={{display: "flex", justifyContent: "center"}}>
             <div className="old-quiz-list">
               <p style={{display: "flex", justifyContent: "center"}}>Previous Quizzes</p>
-              {oldQuizzes ? oldQuizzes.map((quiz, index) => (<div className="old-quiz-btn"><Button sx={{display: "flex", marginTop: "1vh", minWidth: "25vw", justifyContent: "center"}} variant="contained" className="old-quiz" onClick={handleOldQuiz} id={index} >{quiz.quizName} ----- Previous Score: {quiz.score} </Button> </div>)) : null}
+              {oldQuizzes ? oldQuizzes.map((quiz, index) => (<div className="old-quiz-btn"><Button sx={{color: "black", display: "flex", marginTop: "1vh", minWidth: "20vw", justifyContent: "center", backgroundColor: "#bd35fc", "&:hover": {backgroundColor: "#d33bf5", outline: "1px solid rgba(255, 255, 255, 0.5)", outlineOffset: "0.2vw"}}} variant="contained" className="old-quiz" onClick={handleOldQuiz} id={index} >{quiz.quizName} <br /> Previous Score: {quiz.score} </Button> </div>)) : null}
             </div>
           </div>
         </div>
@@ -106,10 +106,9 @@ const HomePage = ({setCurrentPage, username, setQuestionsArr, setQuizName, setOl
   } else {
     return (
       <div>
-        <img src="https://media.tenor.com/mBvN3LJ0Q5AAAAAC/%D0%B2%D0%B5%D0%BB%D1%8C%D0%B7%D0%B5%D0%B2%D1%83%D0%BB%D0%B3%D0%BE%D0%B2%D0%BD%D0%BE%D0%BF%D0%BE%D0%BD%D0%BE%D1%81-beelzebub.gif" alt="face" height="1000vh" width="100%"/>
+        <img src="https://media.tenor.com/hnZRuZhgPSsAAAAd/cat-explosion.gif" alt="face" height="1000vh" width="100%"/>
       </div>
     )
   }
 }
-
 export default HomePage

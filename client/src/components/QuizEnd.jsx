@@ -14,8 +14,7 @@ const QuizEnd = ({setCurrentPage, username, userScore, questionsArr, quizName, s
         var temp = {question: questionsArr[i][0], answer1: questionsArr[i][1], answer2: questionsArr[i][2], answer3: questionsArr[i][3], answer4: questionsArr[i][4], correctAnswer: questionsArr[i][5]}
         quizArr.push(temp)
       }
-      axios.post('/saveQuiz', {"quizName": quizName, quiz: quizArr, score: userScore, username: username})
-      setHasSaved(true)
+      axios.post('/saveQuiz', {"quizName": quizName, quiz: quizArr, score: userScore, username: username}).then(()=>{setHasSaved(true); setCurrentPage(0);})
     } else {
       alert('you have already saved this')
     }
@@ -45,8 +44,8 @@ const QuizEnd = ({setCurrentPage, username, userScore, questionsArr, quizName, s
         <p>would you like to save this quiz?</p>
       </div>
       <div className="quiz-end-btns">
-        <Button variant="contained" onClick={handleSaveQuiz}>save</Button>
-        <Button sx={{marginLeft: "1vw"}} variant="contained" onClick={(e)=>{e.preventDefault; setHasSaved(false); setCurrentPage(0); setUserScore(0)}}>go back home</Button>
+        <Button sx={{backgroundColor: "#c9b926", "&:hover": {backgroundColor: "#d9e833", outline: "1px solid rgba(255, 255, 255, 0.5)", outlineOffset: "0.2vw"}}} variant="contained" onClick={handleSaveQuiz}>save</Button>
+        <Button sx={{marginLeft: "1vw", backgroundColor: "#c9b926", "&:hover": {backgroundColor: "#d9e833", outline: "1px solid rgba(255, 255, 255, 0.5)", outlineOffset: "0.2vw"}}} variant="contained" onClick={(e)=>{e.preventDefault; setHasSaved(false); setCurrentPage(0); setUserScore(0)}}>go back home</Button>
       </div>
     </div>
   )
